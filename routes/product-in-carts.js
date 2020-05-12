@@ -1,0 +1,49 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../models'); // new require for db object
+
+router.post('/', async (req, res) => {
+    const allProductInCart = await db.ProductInCart.findAll();
+
+    return res.json({
+        allProductInCart
+    })
+});
+
+router.post('/add', async ({body: {productId, userId, number}}, res) => {
+    const newProductInCart = await db.ProductInCart.create({
+        productId,
+        userId,
+        number
+    }).then(response => response);
+
+    return res.json({
+        newProductInCart
+    })
+});
+
+router.post('/changeNumber', async ({body: {id, number}}, res) => {
+    const numberOfChanged = await db.ProductInCart.update({
+        number
+    }, {
+        where: {
+            id
+        }
+    }).then(response => response);
+
+    return res.json({
+        numberOfChanged
+    })
+});
+
+router.post('/delete', async ({body: {id}}, res) => {
+    const numberOfDeleted = await db.ProductInCart.destroy({
+        where: {
+            id
+        }
+    });
+
+    return res.json(numberOfDeleted);
+});
+
+module.exports = router;

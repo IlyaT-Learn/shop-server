@@ -1,12 +1,13 @@
 'use strict';
 
 module.exports = {
+
     up: (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert('Categories', [
             {name: 'Auto'},
-            {name: 'Moto'},
-            {name: 'Velo'},
-            {name: 'Mopedo'}
+            {name: 'Morocco'},
+            {name: 'Bike'},
+            {name: 'Mopeds'}
         ], {});
     },
 

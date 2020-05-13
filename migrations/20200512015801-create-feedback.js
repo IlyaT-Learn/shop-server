@@ -9,13 +9,16 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             authorId: {
-                type: Sequelize.STRING
+                type: Sequelize.INTEGER
             },
             productId: {
-                type: Sequelize.STRING
+                type: Sequelize.INTEGER
             },
             numberStars: {
                 type: Sequelize.INTEGER
+            },
+            body: {
+                type: Sequelize.STRING
             }
         });
     },

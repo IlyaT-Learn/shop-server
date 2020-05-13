@@ -14,7 +14,7 @@ router.post('/add', async ({body: {name}}, res) => {
     const newCategory = await db.Category.create({name}).then(response => response);
 
     return res.json({
-        category: newCategory
+        newCategory
     })
 });
 
@@ -26,7 +26,7 @@ router.post('/change', async ({body: {id, name}}, res) => {
     }).then(response => response);
 
     return res.json({
-        newCategory: numberOfChanges
+        numberOfChanges
     })
 });
 

@@ -9,7 +9,7 @@ module.exports = {
             password: 'user_1',
             email: 'testedUser_1@gmail.com',
             phone: '111-222-3333',
-            lastToken: '12345qwe'
+            lastToken: undefined
         }, {
             firstName: 'user_2',
             lastName: 'user_2',
@@ -17,7 +17,7 @@ module.exports = {
             password: 'user_2',
             email: 'testedUser_2@gmail.com',
             phone: '222-333-4444',
-            lastToken: '23456qwe'
+            lastToken: undefined
         }], {});
     },
 

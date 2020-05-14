@@ -1,30 +1,85 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const db = require('../models'); // new require for db object
 
-const createUser = async ({name, password}) => {
-    return await db.User.create({name, password});
-};
-const getAllUsers = async () => {
-    return await db.User.findAll();
-};
-const getUser = async obj => {
-    return await db.User.findOne({
-        where: obj,
-    });
-};
+router.post('/', async (req, res) => {
+    const allUsers = await db.User.findAll();
 
-router.get('/', function (req, res) {
-    getAllUsers().then(user => res.json(user));
+    return res.json({
+        allUsers
+    })
 });
-// register route
-router.post('/register', function (req, res, next) {
-    const {login, password} = req.body;
-    createUser({login, password}).then(user =>
-        res.json({
-            user, msg: `account created successfully`
-        }))
-    ;
+
+router.post('/getUserOrders', async ({body: {userId}}, res) => {
+    const ordersUser = await db.Order.findAll({
+        where: {
+            userId
+        }
+    });
+
+    return res.json({
+        ordersUser
+    });
+});
+
+router.post('/add', async ({body: {firstName, lastName, login, password, email, phone}}, res) => {
+    const newUser = await db.User.create({
+        firstName,
+        lastName,
+        login,
+        password,
+        email,
+        phone
+    }).then(response => response);
+
+    return res.json({
+        newUser
+    })
+});
+
+router.post('/change', async ({body: {id, firstName, lastName, login, password, email, phone}}, res) => {
+    const updateUser = await db.User.update({
+        firstName,
+        lastName,
+        login,
+        password,
+        email,
+        phone
+    }, {
+        where: {
+            id
+        }
+    }).then(response => response);
+
+    return res.json({
+        newUser: updateUser
+    })
+});
+
+router.post('/delete', async ({body: {id}}, res) => {
+    const numberOfDeleted = await db.User.destroy({
+        where: {
+            id
+        }
+    });
+
+    return res.json({
+        numberOfDeleted
+    });
+});
+
+router.post('/updateToken', async ({body: {id, lastToken}}, res) => {
+    const newToken = await db.User.update({
+        lastToken
+    }, {
+        where: {
+            id
+        }
+    }).then(response => response);
+
+    return res.json({
+        newToken
+    })
 });
 
 module.exports = router;

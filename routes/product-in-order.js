@@ -29,7 +29,9 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json(numberOfDeleted);
+    return res.json({
+        numberOfDeleted
+    });
 });
 
 module.exports = router;

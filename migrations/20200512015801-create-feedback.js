@@ -11,6 +11,9 @@ module.exports = {
             authorId: {
                 type: Sequelize.INTEGER
             },
+            authorSign: {
+                type: Sequelize.INTEGER
+            },
             productId: {
                 type: Sequelize.INTEGER
             },

@@ -5,9 +5,7 @@ const db = require('../models'); // new require for db object
 router.post('/', async (req, res) => {
     const allOrders = await db.Order.findAll();
 
-    return res.json({
-        allOrders
-    })
+    return res.json(allOrders)
 });
 
 router.post('/add', async ({body: {userId}}, res) => {
@@ -26,6 +24,18 @@ router.post('/delete', async ({body: {id}}, res) => {
     });
 
     return res.json(numberOfDeleted);
+});
+
+router.post('/getOrder', async ({body: {id}}, res) => {
+    const order = await db.ProductInOrder.findAll({
+        where: {
+            orderId: id
+        }
+    });
+
+    return res.json({
+        order
+    });
 });
 
 module.exports = router;

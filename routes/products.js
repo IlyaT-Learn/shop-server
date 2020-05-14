@@ -6,13 +6,13 @@ router.post('/', async (req, res) => {
     const allProduct = await db.Product.findAll();
 
     return res.json({
-        prod: allProduct
+        allProduct
     })
 });
 
-router.post('/add', async ({body: {idCategories, name, description, picture, price, numberOfPromo}}, res) => {
+router.post('/add', async ({body: {categoryId, name, description, picture, price, numberOfPromo}}, res) => {
     const newProduct = await db.Product.create({
-        idCategories,
+        categoryId,
         name,
         description,
         picture,
@@ -26,9 +26,9 @@ router.post('/add', async ({body: {idCategories, name, description, picture, pri
     })
 });
 
-router.post('/change', async ({body: {id, idCategories, name, description, picture, price, numberOfPromo}}, res) => {
-    const numberOfChanged = await db.Product.update({
-        idCategories,
+router.post('/change', async ({body: {id, categoryId, name, description, picture, price, numberOfPromo}}, res) => {
+    const accessOfChanged = await db.Product.update({
+        categoryId,
         name,
         description,
         picture,
@@ -41,8 +41,19 @@ router.post('/change', async ({body: {id, idCategories, name, description, pictu
     }).then(response => response);
 
     return res.json({
-        newProduct: numberOfChanged
+        accessOfChanged
     })
+});
+
+router.post('/productRating', async ({body: {productId}}, res) => {
+    const allReviewsOfProduct = await db.Feedback.findAll({
+        where: {
+            productId
+        }
+    });
+    const result = allReviewsOfProduct.reduce((sum, current) => sum + current.numberStars, 0);
+
+    return res.json(result / allReviewsOfProduct.length);
 });
 
 router.post('/delete', async ({body: {id}}, res) => {
@@ -52,7 +63,9 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json(numberOfDeleted);
+    return res.json({
+        numberOfDeleted
+    });
 });
 
 module.exports = router;

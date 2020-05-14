@@ -12,7 +12,7 @@ module.exports = {
             number: 2
         }, {
             productId: 3,
-            userId: 3,
+            userId: 1,
             number: 3
         }
         ], {});

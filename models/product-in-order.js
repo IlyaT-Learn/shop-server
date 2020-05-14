@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-
-    const ProductInCart = sequelize.define('ProductInOrder', {
+    const ProductInOrder = sequelize.define('ProductInOrder', {
         productId: DataTypes.INTEGER,
         orderId: DataTypes.INTEGER,
         number: DataTypes.INTEGER
@@ -9,9 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
 
-    ProductInCart.associate = function (models) {
+    ProductInOrder.associate = function (models) {
         // associations can be defined here
     };
 
-    return ProductInCart;
+    return ProductInOrder;
 };

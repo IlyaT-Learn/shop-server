@@ -10,9 +10,22 @@ router.post('/', async (req, res) => {
     })
 });
 
-router.post('/add', async ({body: {authorId, productId, numberStars}}, res) => {
+router.post('/productReviews', async ({body: {productId}}, res) => {
+    const allReviewsOfProduct = await db.Feedback.findAll({
+        where: {
+            productId
+        }
+    });
+
+    return res.json({
+        allReviewsOfProduct
+    })
+});
+
+router.post('/add', async ({body: {authorId, authorSign, productId, numberStars}}, res) => {
     const newFeedback = await db.Feedback.create({
         authorId,
+        authorSign,
         productId,
         numberStars
     }).then(response => response);
@@ -29,7 +42,9 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json(numberOfDeleted);
+    return res.json({
+        numberOfDeleted
+    });
 });
 
 module.exports = router;

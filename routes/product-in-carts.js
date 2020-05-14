@@ -23,7 +23,7 @@ router.post('/add', async ({body: {productId, userId, number}}, res) => {
 });
 
 router.post('/changeNumber', async ({body: {id, number}}, res) => {
-    const numberOfChanged = await db.ProductInCart.update({
+    const accessOfChanged = await db.ProductInCart.update({
         number
     }, {
         where: {
@@ -32,7 +32,7 @@ router.post('/changeNumber', async ({body: {id, number}}, res) => {
     }).then(response => response);
 
     return res.json({
-        numberOfChanged
+        accessOfChanged
     })
 });
 
@@ -43,7 +43,21 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json(numberOfDeleted);
+    return res.json({
+        numberOfDeleted
+    });
+});
+
+router.post('/userCart', async ({body: {userId}}, res) => {
+    const cartCurrentUser = await db.ProductInCart.findAll({
+        where: {
+            userId
+        }
+    });
+
+    return res.json({
+        cartCurrentUser
+    });
 });
 
 module.exports = router;

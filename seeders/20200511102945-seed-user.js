@@ -9,7 +9,8 @@ module.exports = {
             password: 'user_1',
             email: 'testedUser_1@gmail.com',
             phone: '111-222-3333',
-            lastToken: undefined
+            lastToken: undefined,
+            isAdmin: 0
         }, {
             firstName: 'user_2',
             lastName: 'user_2',
@@ -17,7 +18,17 @@ module.exports = {
             password: 'user_2',
             email: 'testedUser_2@gmail.com',
             phone: '222-333-4444',
-            lastToken: undefined
+            lastToken: undefined,
+            isAdmin: 0
+        }, {
+            firstName: 'user_3',
+            lastName: 'user_3',
+            login: 'user_3',
+            password: 'user_3',
+            email: 'testedUser_3@gmail.com',
+            phone: '333-444-5555',
+            lastToken: undefined,
+            isAdmin: 0
         }], {});
     },
 

@@ -29,6 +29,9 @@ module.exports = {
             },
             lastToken: {
                 type: Sequelize.STRING
+            },
+            isAdmin: {
+                type: Sequelize.INTEGER
             }
         });
     },

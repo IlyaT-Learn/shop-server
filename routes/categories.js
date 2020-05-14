@@ -19,14 +19,14 @@ router.post('/add', async ({body: {name}}, res) => {
 });
 
 router.post('/change', async ({body: {id, name}}, res) => {
-    const numberOfChanges = await db.Category.update({name}, {
+    const successOfChange = await db.Category.update({name}, {
         where: {
             id
         }
     }).then(response => response);
 
     return res.json({
-        numberOfChanges
+        successOfChange
     })
 });
 
@@ -37,7 +37,24 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json(numberOfDeleted);
+    return res.json({
+        numberOfDeleted
+    });
+});
+
+router.post('/getProductsOfCategory', async ({body: {categoryId, pageSize, currentPage}}, res) => {
+
+    const allProductsOfCategory = await db.Product.findAndCountAll({
+        where: {
+            categoryId
+        },
+        limit: pageSize,
+        offset: currentPage - 1
+    });
+
+    return res.json({
+        allProductsOfCategory
+    });
 });
 
 module.exports = router;

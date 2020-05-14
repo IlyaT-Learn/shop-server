@@ -10,6 +10,18 @@ router.post('/', async (req, res) => {
     })
 });
 
+router.post('/getUserOrders', async ({body: {userId}}, res) => {
+    const ordersUser = await db.Order.findAll({
+        where: {
+            userId
+        }
+    });
+
+    return res.json({
+        ordersUser
+    });
+});
+
 router.post('/add', async ({body: {firstName, lastName, login, password, email, phone}}, res) => {
     const newUser = await db.User.create({
         firstName,
@@ -26,7 +38,7 @@ router.post('/add', async ({body: {firstName, lastName, login, password, email, 
 });
 
 router.post('/change', async ({body: {id, firstName, lastName, login, password, email, phone}}, res) => {
-    const newUser = await db.User.update({
+    const updateUser = await db.User.update({
         firstName,
         lastName,
         login,
@@ -40,7 +52,7 @@ router.post('/change', async ({body: {id, firstName, lastName, login, password, 
     }).then(response => response);
 
     return res.json({
-        newUser
+        newUser: updateUser
     })
 });
 
@@ -51,11 +63,13 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json(numberOfDeleted);
+    return res.json({
+        numberOfDeleted
+    });
 });
 
 router.post('/updateToken', async ({body: {id, lastToken}}, res) => {
-    const result = await db.User.update({
+    const newToken = await db.User.update({
         lastToken
     }, {
         where: {
@@ -64,7 +78,7 @@ router.post('/updateToken', async ({body: {id, lastToken}}, res) => {
     }).then(response => response);
 
     return res.json({
-        result
+        newToken
     })
 });
 

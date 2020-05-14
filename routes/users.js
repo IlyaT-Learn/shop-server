@@ -22,6 +22,7 @@ router.post('/getUserOrders', async ({body: {userId}}, res) => {
     });
 });
 
+
 router.post('/add', async ({body: {firstName, lastName, login, password, email, phone}}, res) => {
     const newUser = await db.User.create({
         firstName,

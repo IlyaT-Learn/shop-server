@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models'); // new require for db object
+const jsonParser = express.json();
 
 router.post('/', async (req, res) => {
     const allUsers = await db.User.findAll();
@@ -80,6 +81,20 @@ router.post('/updateToken', async ({body: {id, lastToken}}, res) => {
     return res.json({
         newToken
     })
+});
+
+router.post("/login", jsonParser, async function (request, response) {
+    console.log(request.body);
+    if(!request.body) return response.sendStatus(400);
+
+    await db.User.findAll({
+        where: {
+            email: request.body.email,
+            password: request.body.password
+        }
+    }).then(data => {
+        response.json(data[0].lastToken);
+    }).catch(err=>console.log(err));;
 });
 
 module.exports = router;

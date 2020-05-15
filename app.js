@@ -12,6 +12,7 @@ const productInCartsRouter = require('./routes/product-in-carts');
 const ordersRouter = require('./routes/orders');
 const productInOrdersRouter = require('./routes/product-in-order');
 const feedbackRouter = require('./routes/feedback');
+const cors = require('cors')
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

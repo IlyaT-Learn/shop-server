@@ -8,7 +8,7 @@ module.exports = {
             number: 1
         }, {
             productId: 2,
-            userId: 2,
+            userId: 1,
             number: 2
         }, {
             productId: 3,

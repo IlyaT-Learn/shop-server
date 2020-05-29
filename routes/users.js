@@ -83,9 +83,9 @@ router.post('/updateToken', async ({body: {id, lastToken}}, res) => {
     })
 });
 
-router.post("/login", jsonParser, async function (request, response) {
+router.post('/login', jsonParser, async function (request, response) {
     console.log(request.body);
-    if(!request.body) return response.sendStatus(400);
+    if (!request.body) return response.sendStatus(400);
 
     await db.User.findAll({
         where: {
@@ -94,7 +94,8 @@ router.post("/login", jsonParser, async function (request, response) {
         }
     }).then(data => {
         response.json(data[0].lastToken);
-    }).catch(err=>console.log(err));;
+    }).catch(err => console.log(err));
+    ;
 });
 
 module.exports = router;

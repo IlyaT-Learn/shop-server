@@ -12,20 +12,20 @@ module.exports = {
             }, {
                 authorId: 2,
                 authorSign: 'Петя',
-                productId: 2,
+                productId: 7,
                 numberStars: 4,
                 body: 'Body of feedback_2'
             }, {
                 authorId: 2,
                 authorSign: 'Галя',
                 productId: 2,
-                numberStars: 4,
+                numberStars: 5,
                 body: 'Body of feedback_3'
             }, {
                 authorId: 2,
                 authorSign: 'Саша',
-                productId: 2,
-                numberStars: 4,
+                productId: 11,
+                numberStars: 1,
                 body: 'Body of feedback_4'
             },
         ], {});

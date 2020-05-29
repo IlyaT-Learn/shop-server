@@ -57,6 +57,20 @@ router.post('/change', async ({body: {id, firstName, lastName, login, password, 
     })
 });
 
+router.post('/makeAdmin', async ({body: {id}}, res) => {
+    const updateUser = await db.User.update({
+        isAdmin: 1
+    }, {
+        where: {
+            id
+        }
+    }).then(response => response);
+
+    return res.json({
+        updateUser
+    })
+});
+
 router.post('/delete', async ({body: {id}}, res) => {
     const numberOfDeleted = await db.User.destroy({
         where: {

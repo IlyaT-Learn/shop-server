@@ -24,6 +24,11 @@ router.post('/getUserOrders', async ({body: {userId}}, res) => {
 });
 
 router.post('/add', async ({body: {firstName, lastName, login, password, email, phone}}, res) => {
+    if ((await db.User.findAll({where: {email}})).length !== 0) {
+
+        return res.json('A user with this address exists');
+    }
+
     const newUser = await db.User.create({
         firstName,
         lastName,
@@ -97,6 +102,20 @@ router.post('/updateToken', async ({body: {id, lastToken}}, res) => {
     })
 });
 
+router.post('/login', async ({body: {email, password}}, res) => {
+    const resultFind = await db.User.findAll({
+        where: {
+            email,
+            password
+        }
+    });
+
+    return res.json(
+        !resultFind.length ? null : resultFind
+    );
+});
+
+/*
 router.post('/login', jsonParser, async function (request, response) {
     console.log(request.body);
     if (!request.body) return response.sendStatus(400);
@@ -111,5 +130,6 @@ router.post('/login', jsonParser, async function (request, response) {
     }).catch(err => console.log(err));
     ;
 });
+*/
 
 module.exports = router;

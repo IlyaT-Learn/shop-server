@@ -45,17 +45,6 @@ router.post('/change', async ({body: {id, categoryId, name, description, picture
     })
 });
 
-router.post('/productRating', async ({body: {productId}}, res) => {
-    const allReviewsOfProduct = await db.Feedback.findAll({
-        where: {
-            productId
-        }
-    });
-    const result = allReviewsOfProduct.reduce((sum, current) => sum + current.numberStars, 0);
-
-    return res.json(result / allReviewsOfProduct.length);
-});
-
 router.post('/delete', async ({body: {id}}, res) => {
     const numberOfDeleted = await db.Product.destroy({
         where: {

@@ -30,6 +30,20 @@ router.post('/add', async ({body: {authorId, authorSign, productId, numberStars}
         numberStars
     }).then(response => response);
 
+    const allRating = await db.Feedback.findAll({
+        where: {
+            productId
+        }
+    });
+
+    await db.Product.update({
+        rating: (allRating.reduce((sum, current) => sum + current.numberStars, 0) / allRating.length)
+    }, {
+        where: {
+            id: productId
+        }
+    }).then(response => response);
+
     return res.json({
         newFeedback
     })

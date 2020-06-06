@@ -48,6 +48,18 @@ router.post('/delete', async ({body: {id}}, res) => {
     });
 });
 
+router.post('/deleteAll', async ({body: {userId}}, res) => {
+    const numberOfDeleted = await db.ProductInCart.destroy({
+        where: {
+            userId
+        }
+    });
+
+    return res.json({
+        numberOfDeleted
+    });
+});
+
 router.post('/userCart', async ({body: {userId}}, res) => {
     const cartCurrentUser = await db.ProductInCart.findAll({
         where: {

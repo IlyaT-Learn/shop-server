@@ -111,7 +111,7 @@ router.post('/login', async ({body: {email, password}}, res) => {
     });
 
     return res.json(
-        !resultFind.length ? null : resultFind
+        !resultFind.length ? null : resultFind[0]
     );
 });
 

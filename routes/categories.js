@@ -5,7 +5,7 @@ const db = require('../models'); // new require for db object
 router.post('/', async ({body: {pageSize, currentPage}}, res) => {
     const allCategories = await db.Category.findAndCountAll({
         limit: pageSize,
-        offset: currentPage - 1
+        offset: (currentPage - 1) * pageSize
     });
 
     return res.json({

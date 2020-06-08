@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models'); // new require for db object
 
-router.post('/', async ({pageSize, currentPage}, res) => {
-    const allProduct = await db.Product.findAndCountAll({
+router.post('/', async ({body: {pageSize, currentPage}}, res) => {
+    const allProduct = await db.Product.findAndCountAll({}, {
         limit: pageSize,
         offset: currentPage - 1
     });

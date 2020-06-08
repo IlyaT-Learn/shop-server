@@ -39,7 +39,6 @@ router.post('/delete', async ({body: {id}}, res) => {
 });
 
 router.post('/getProductsOfCategory', async ({body: {categoryId, pageSize, currentPage}}, res) => {
-
     const allProductsOfCategory = await db.Product.findAndCountAll({
         where: {
             categoryId

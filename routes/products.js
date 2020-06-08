@@ -21,8 +21,7 @@ router.post('/add', async ({body: {categoryId, name, description, picture, price
     }).then(response => response);
 
     return res.json({
-        newProduct,
-        message: 'Product successfully added'
+        newProduct
     })
 });
 

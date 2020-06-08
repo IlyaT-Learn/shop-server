@@ -2,11 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models'); // new require for db object
 
-router.post('/', async ({pageSize, currentPage}, res) => {
-    const allCategories = await db.Product.findAndCountAll({
-        limit: pageSize,
-        offset: currentPage - 1
-    });
+router.post('/', async (req, res) => {
+    const allCategories = await db.Category.findAll();
 
     return res.json({
         allCategories

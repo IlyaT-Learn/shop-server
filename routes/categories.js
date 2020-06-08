@@ -2,8 +2,11 @@ const express = require('express');
 const router = express.Router();
 const db = require('../models'); // new require for db object
 
-router.post('/', async (req, res) => {
-    const allCategories = await db.Category.findAll();
+router.post('/', async ({body: {pageSize, currentPage}}, res) => {
+    const allCategories = await db.Category.findAndCountAll({
+        limit: pageSize,
+        offset: currentPage - 1
+    });
 
     return res.json({
         allCategories

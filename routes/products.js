@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../models'); // new require for db object
 
 router.post('/', async ({body: {pageSize, currentPage}}, res) => {
-    const allProduct = await db.Product.findAndCountAll({}, {
+    const allProduct = await db.Product.findAndCountAll({
         limit: pageSize,
         offset: currentPage - 1
     });
@@ -62,7 +62,7 @@ router.post('/byId', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json(product);
+    return res.json(product[0]);
 });
 
 module.exports = router;

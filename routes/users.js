@@ -128,21 +128,4 @@ router.post('/loginAsAdmin', async ({body: {email, password}}, res) => {
     );
 });
 
-/*
-router.post('/login', jsonParser, async function (request, response) {
-    console.log(request.body);
-    if (!request.body) return response.sendStatus(400);
-
-    await db.User.findAll({
-        where: {
-            email: request.body.email,
-            password: request.body.password
-        }
-    }).then(data => {
-        response.json(data[0].lastToken);
-    }).catch(err => console.log(err));
-    ;
-});
-*/
-
 module.exports = router;

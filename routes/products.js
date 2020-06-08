@@ -42,9 +42,7 @@ router.post('/change', async ({body: {id, categoryId, name, description, picture
         }
     }).then(response => response);
 
-    return res.json({
-        accessOfChanged
-    })
+    return res.json(accessOfChanged)
 });
 
 router.post('/delete', async ({body: {id}}, res) => {
@@ -54,9 +52,7 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json({
-        numberOfDeleted
-    });
+    return res.json(numberOfDeleted);
 });
 
 module.exports = router;

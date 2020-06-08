@@ -25,9 +25,7 @@ router.post('/change', async ({body: {id, name}}, res) => {
         }
     }).then(response => response);
 
-    return res.json({
-        successOfChange
-    })
+    return res.json(successOfChange)
 });
 
 router.post('/delete', async ({body: {id}}, res) => {
@@ -37,9 +35,7 @@ router.post('/delete', async ({body: {id}}, res) => {
         }
     });
 
-    return res.json({
-        numberOfDeleted
-    });
+    return res.json(numberOfDeleted);
 });
 
 router.post('/getProductsOfCategory', async ({body: {categoryId, pageSize, currentPage}}, res) => {

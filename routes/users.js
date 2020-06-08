@@ -115,6 +115,19 @@ router.post('/login', async ({body: {email, password}}, res) => {
     );
 });
 
+router.post('/loginAsAdmin', async ({body: {email, password}}, res) => {
+    const resultFind = await db.User.findAll({
+        where: {
+            email,
+            password
+        }
+    });
+
+    return res.json(
+        !resultFind.length || !resultFind[0].isAdmin ? null : resultFind[0]
+    );
+});
+
 /*
 router.post('/login', jsonParser, async function (request, response) {
     console.log(request.body);

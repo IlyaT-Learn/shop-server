@@ -11,15 +11,33 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/add', async ({body: {productId, userId, number}}, res) => {
-    const newProductInCart = await db.ProductInCart.create({
+    const existingProduct = await db.ProductInCart.findAll({
+        where: {
+            userId,
+            productId
+        }
+    }).then(response => response);
+
+    if (existingProduct.length) {
+        await db.ProductInCart.update({
+            number: existingProduct[0].number + +number
+        }, {
+            where: {
+                userId,
+                productId
+            }
+        }).then(response => response);
+
+        return res.json('update');
+    }
+
+    await db.ProductInCart.create({
         productId,
         userId,
         number
     }).then(response => response);
 
-    return res.json({
-        newProductInCart
-    })
+    return res.json('create');
 });
 
 router.post('/changeNumber', async ({body: {id, number}}, res) => {

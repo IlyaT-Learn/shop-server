@@ -55,4 +55,14 @@ router.post('/delete', async ({body: {id}}, res) => {
     return res.json(numberOfDeleted);
 });
 
+router.post('/byId', async ({body: {id}}, res) => {
+    const product = await db.Product.findAll({
+        where: {
+            id
+        }
+    });
+
+    return res.json(product);
+});
+
 module.exports = router;
